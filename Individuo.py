@@ -1,57 +1,92 @@
 from array import array
+import random
 class individuo:
 #atributos de cada individuo de la poblacion de la generacion actual
+ 
+    #Declaro una lista de genes de tamaño 10 con valores entre 0 y 1
+    genes = []
+   
 
-    padre = [1,2,4,6,7,8,0]
-    madre = [0,6,4,42,42,4,2]
-    hijo = []
+    #bucle para rellenar la lista de genes con valores 0 o 1
+    
+    def rellenarGenes(self):
+        for i in range(10): 
+            self.genes.append(random.randint(0,1))
+        
 
-    def __init__(self, padre, madre, hijo):
-        self.padre = padre
-        self.madre = madre
-        self.hijo = hijo
-
-    def getPadre(self):
-        return self.padre
-
-    def getMadre(self):
-        return self.madre
-
-    def getHijo(self):
-        return self.hijo
-
-    def setPadre(self, padre):
-        self.padre = padre
-
-    def setMadre(self, madre):
-        self.madre = madre
-
-    def setHijo(self, hijo):
-        self.hijo = hijo
-
-    def __str__(self):
-        return "Padre: " + str(self.padre) + " Madre: " + str(self.madre) + " Hijo: " + str(self.hijo)
-
-    def __repr__(self):
-        return "Padre: " + str(self.padre) + " Madre: " + str(self.madre) + " Hijo: " + str(self.hijo)  
-
-    def __eq__(self, other):
-        return self.padre == other.padre and self.madre == other.madre and self.hijo == other.hijo
+    #constructor
+    def __init__(self, genes):
+        self.genes = genes
+        
+#Metodo para cruzar 2 individuos y devolver un nuevo individuo con los genes de los padres cruzados indicando el punto de cruce 
+    def cruzarPunto(self, individuo2, punto):
+        #Declaro una lista de genes de tamaño 10 con valores entre 0 y 1
+        genesCruza = []
+        #bucle para rellenar la lista de genes con valores 0 o 1
+        for i in range(10): 
+            if i < punto:
+                genesCruza.append(self.genes[i])
+            else:
+                genesCruza.append(individuo2.genes[i])
+        #Creo un nuevo individuo con los genes de los padres cruzados
+        individuoCruza = individuo(genesCruza)
+        return individuoCruza
 
 
-#metodo para crear un individuo a partir de un padre y una madre y una posicion de la matriz de genes a mutar 
-def crearIndividuo(padre, madre, posicion):
-    hijo = []
-    for i in range(len(padre)):
-        if i == posicion:
-            hijo.append(madre[i])
-        else:
-            hijo.append(padre[i])
-    return hijo
+#Metodo para cruzar 2 individuos y devolver un nuevo individuo con los genes de los padres cruzados 
+    def cruzar(self, individuo2):
+        #Declaro una lista de genes de tamaño 10 con valores entre 0 y 1
+        genesCruza = []
+        #bucle para rellenar la lista de genes con valores 0 o 1
+        for i in range(10): 
+            if random.randint(0,1) == 0:
+                genesCruza.append(self.genes[i])
+            else:
+                genesCruza.append(individuo2.genes[i])
+        #Creo un nuevo individuo con los genes de los padres cruzados
+        individuoCruza = individuo(genesCruza)
+        return individuoCruza
 
 
+#Metodo para mutar un individuo y devolver un nuevo individuo con uno de los genes mutados pasando una probabilidad
+    def mutar(self, probabilidad):
+        #Declaro una lista de genes de tamaño 10 con valores entre 0 y 1
+        genesMutacion = []
+        #bucle para rellenar la lista de genes con valores 0 o 1
+        for i in range(10): 
+            if random.random() < probabilidad:
+                if self.genes[i] == 0:
+                    genesMutacion.append(1)
+                    print("Se ha mutado el gen " + str(i) + " a 1")
+                else:
+                    print("Se ha mutado el gen " + str(i) + " a 0")
+                    genesMutacion.append(0)
+            else:
+                print("No se ha mutado el gen " + str(i))
+                genesMutacion.append(self.genes[i])
+        #Creo un nuevo individuo con los genes de los padres cruzados
+        individuoMutacion = individuo(genesMutacion)
+        return individuoMutacion
+    
+
+#creo un individuo con los genes aleatorios generados y lo imprimo
+individuo1 = individuo([])
+individuo1.rellenarGenes()
+print(individuo1.genes)
+
+individuo2 = individuo([])
+individuo2.rellenarGenes()
+print(individuo2.genes)
 
 
+# individuoCruzado = individuo1.cruzar(individuo2)
+# print(individuoCruzado.genes)
+
+individuoCruzado2 = individuo1.cruzarPunto(individuo2, 5)
+print(individuoCruzado2.genes)
 
 
-print(crearIndividuo(individuo.padre, individuo.madre, 3))
+individuoMutado = individuo1.mutar(0.2)
+
+print(individuoMutado.genes)
+
