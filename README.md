@@ -5,11 +5,11 @@ Este proyecto consiste en analizar la calidad del código a a través de 2 plata
 - SonarCloud
 
 Se ha desarollado un programa en python que viene a ser un pequeño algoritmo genético en el que se siguen los siguientes pasos:
-- Se establece una pobalcion de X individuos.
-- Esta poblacion puede cruzarse, por tanto, aleatoriamente se cruzan los individuso de una poblacion indicada.
+- Se establece una población de X individuos que pasamos por parámetro.
+- Esta población puede cruzarse, por tanto, aleatoriamente se cruzan los individuos de una población indicada.
 - En el proceos de cruce se selecciona aleatoriamente qué genes se heredan de cada progenitor.
-- Además, mediante una probabilidad indicada, este individuo fruto del cruce puede sufrir mutaciones en algun gen de manera aleatoria.
-- Una vez se haya cruzado la poblacion se obtiene una lista de una nueva poblacion cruzada y/o mutada.
+- Además, mediante una probabilidad indicada, este individuo fruto del cruce puede sufrir mutaciones en algún gen de manera aleatoria.
+- Una vez se haya cruzado la población se obtiene una lista de una nueva población cruzada y/o mutada.
 
 ## Enlaces a SonarCloud y Codacy
 
